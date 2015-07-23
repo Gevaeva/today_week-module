@@ -1,0 +1,77 @@
+<?php
+// $Id$
+/**
+* @file
+* A module width date, today name and number.
+*
+* This module provides a block that lists the today's name,
+* and a variable width the number of today
+*/
+/**
+* Implements hook_help().
+*/
+function today_thisweek_help($path, $arg) {
+  if ($path == 'admin/help#today_thisweek') {
+	return t('A module determines the named of the today.');
+  }
+}
+
+/**
+* Implements hook_block_info().
+*/
+function today_thisweek_block_info() {
+  $blocks = array();
+  $blocks['date_today_modules'] = array(
+  'info' => t('Date and Name of the today.'),
+  'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+* Implements hook_block_view().
+*/
+function today_thisweek_block_view($block_name = '') {
+  if ($block_name == 'date_today_modules') {
+    $today = date("w", time());
+    
+	switch ($today) {
+	  case 0:
+		$actday = t('Sunday');
+		break;
+	  case 1:
+	    $actday = t('Monday');
+		break;
+	  case 2:
+		$actday = t('Tuesday');
+		break;
+	  case 3:
+		$actday = t('Wednesday');
+		break;
+	  case 4:
+		$actday = t('Thursday');
+		break;
+	  case 5:
+		$actday = t('Friday');
+		break;
+	  case 6:
+		$actday = t('Saturday');
+		break;
+	  default:
+	    $actday = 'DAY';
+	}
+	$ma = date("Y.m.d", time());
+	$t = time();
+    $ora = date("H", $t);
+    $perc = date("i", $t);
+    $masodperc = date("s", $t);
+    $ido = $ora.":".$perc.":".$masodperc;
+	$content = '<span class="ma">Most: </span><span class="datum">' . $ma . ' ' . $actday . '</span> <span class="pontosido">' . ' ' . $ido . '</span>';
+	
+    $block = array(
+      'subject' => t('Date and today'),
+      'content' => $content,
+	  );
+  return $block;
+  }
+}

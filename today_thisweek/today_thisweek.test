@@ -1,0 +1,8 @@
+<?php
+/**
+* @file
+* Tests for the today_thisweek module
+*/
+class Today_thisweekTestCase extends DrupalWebTestCase {
+// Methods will go here.
+}

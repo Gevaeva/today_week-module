@@ -1,0 +1,8 @@
+;$Id$
+
+name = Today in this week
+description = A module for today's name and number.
+package = Geva
+core = 7.x
+files[] = today_thisweek.module
+files[] = today_thisweek.test
